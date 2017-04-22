@@ -8,6 +8,7 @@ class User {
     this.name = name;
     this.password = password;
     this.cookie = "";
+    this.loginState = {};
   }
 
   signin() {
@@ -19,13 +20,17 @@ class User {
         password: this.password
       },
       transform: function (body, response, resolveWithFullResponse) {
-        this.cookie = response.caseless.dict["set-cookie"][0];
-        body.cookie = this.cookie;
-        return body;
+        let cookie = response.caseless.dict["set-cookie"][0];
+        return [body, cookie];
       },
       json: true
     }
-    return request(options);
+    return request(options)
+      .then(([body, cookie]) => {
+        this.loginState = body;
+        this.cookie = cookie;
+        return Promise.resolve(this);
+      });
   }
 }
 
