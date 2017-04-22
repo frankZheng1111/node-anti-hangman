@@ -28,8 +28,6 @@ class Hangman {
     let options = {
       method: 'POST',
       uri: `${hangmanServer.url}/api/hangmen`,
-      form: {
-      },
       headers: {
         Cookie: this.cookie
       },
