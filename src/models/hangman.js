@@ -7,7 +7,7 @@ import { hangmanServer } from '../config';
 const HANGMAN_FINSIHED_STATES = [ 'win', 'lose', 'giveup' ];
 
 class Hangman {
-  constructor(cookie, firstLetter = 'O') {
+  constructor(cookie, firstLetter = 'e') {
     this.cookie = cookie;
     this.id = "";
     this.hp = -1;

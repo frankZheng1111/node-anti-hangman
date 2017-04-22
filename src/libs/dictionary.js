@@ -8,7 +8,7 @@ export function initDictionary() {
    dictionary = fs.readFileSync('config/dictionary.txt').toString().split('\n');
   let lettersHash = [{}];
   return dictionary.map((word) => {
-     return word.split('');
+     return word.toLowerCase().split('');
   });
 };
 
@@ -40,7 +40,10 @@ export function getMostLetter(currentDictionary, wordStr = '') {
   let mostLetter = '';
   let mostLetterNum = 0;
   for(let letter in lettersNums) {
-    if (mostLetterNum < lettersNums[letter]) { mostLetter = letter; }
+    if (mostLetterNum < lettersNums[letter]) {
+      mostLetter = letter;
+      mostLetterNum = lettersNums[letter];
+    }
   }
   return mostLetter;
 }

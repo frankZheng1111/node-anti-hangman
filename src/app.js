@@ -19,7 +19,6 @@ function playHangman(user) {
       id: hangman.id
     });
   });
-
 }
 
 new User(userConfig.name, userConfig.password).signin()
