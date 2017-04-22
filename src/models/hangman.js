@@ -1,19 +1,20 @@
 'use strict'
 import request from 'request-promise';
 import logger from '../libs/logger';
+import { initDictionary, filterDictionary, getMostLetter } from '../libs/dictionary';
 import { hangmanServer } from '../config';
 
 const HANGMAN_FINSIHED_STATES = [ 'win', 'lose', 'giveup' ];
-let letters = 'abcdefghijklmnopqrstuvwxyz'.split('')
 
 class Hangman {
-  constructor(cookie) {
-    console.log(cookie)
+  constructor(cookie, firstLetter = 'O') {
     this.cookie = cookie;
     this.id = "";
     this.hp = -1;
     this.state = "";
     this.currentWordStr = "";
+    this.dictionary = initDictionary();
+    this.nextLetter = firstLetter;
   }
 
   refreshHangmanByResp(hangman) {
@@ -40,13 +41,12 @@ class Hangman {
         return Promise.resolve(this);
       });
   }
-  
+
   guessingWord() {
-    letters.pop();
     if (HANGMAN_FINSIHED_STATES.includes(this.state)) {
       return Promise.resolve(this);
     } else {
-      return this.guess(letters[letters.length - 1])
+      return this.guess(this.nextLetter)
         .then(() => {
           return this.guessingWord();
         });
@@ -66,7 +66,13 @@ class Hangman {
       json: true
     }
     return request(options).then((hangman) => {
+      let falseLetter = ''
+      if (this.hp > hangman.data.attributes.hp) {
+        falseLetter = letter;
+      }
       this.refreshHangmanByResp(hangman);
+      this.dictionary = filterDictionary(this.dictionary, this.currentWordStr, falseLetter);
+      this.nextLetter = getMostLetter(this.dictionary, this.currentWordStr);
       logger.info(`ID: ${this.id}, GUESS: ${letter}, HP: ${this.hp}, CURRENTWORD: ${this.currentWordStr}`);
       return Promise.resolve(this);
     });
