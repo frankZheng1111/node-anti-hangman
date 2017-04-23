@@ -77,6 +77,21 @@ class Hangman {
       return Promise.resolve(this);
     });
   }
+
+  static play(user) {
+    return new this(user.cookie, getMostLetter(initDictionary())).newGame()
+      .then((hangman) => {
+        return hangman.guessingWord();
+      })
+      .then((hangman) => {
+        logger.info(`STATE: ${hangman.state}, HP: ${hangman.hp}, CURRENTWORD: ${hangman.currentWordStr}`);
+        return Promise.resolve({
+          state: hangman.state,
+          hp: hangman.hp,
+          id: hangman.id
+        });
+      });
+  }
 }
 
 export default Hangman;
