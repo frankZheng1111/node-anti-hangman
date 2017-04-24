@@ -1,6 +1,6 @@
 # node-anti-hangman
 
-Just for practice：A simple script for play [hangmangame web](https://github.com/frankZheng1111/hangman-web)  game based on nodejs
+Just for practice：A simple script for play [hangman web](https://github.com/frankZheng1111/hangman-web)  game based on nodejs
 
 ## Environment
 
