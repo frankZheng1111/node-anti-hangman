@@ -6,7 +6,8 @@
   "scripts": {
     "test": "NODE_ENV=test node_modules/.bin/babel-node node_modules/.bin/babel-istanbul cover node_modules/.bin/_mocha -- test --recursive",
     "build": "babel src -d build",
-    "start": "nodemon src/app.js --exec babel-node"
+    "start": "nodemon src/app.js --exec babel-node",
+    "start-game": "node build/app.js"
   },
   "repository": {
     "type": "git",
