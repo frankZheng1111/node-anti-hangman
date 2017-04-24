@@ -13,21 +13,31 @@ Just for practice：A simple script for play [hangman web](https://github.com/fr
   ```
   npm install
   ```
-
-2. Build game
+2. set user name and password in [config/user.json](config/user.json)
+  
+  ```json
+  {
+    "dev": {
+      "name": "REPLACE YOUR NAME",
+      "password": "RELACE YOUR PASSWORD"
+    }
+  }
+  ```
+  
+3. Build game
 
   ```
   npm run build
   ```
- 
- 3. Start game
+
+4. Start game
  
   ```
   npm run start-game
   ```
   
- ## How to test
- 
+## How to test
+
   ```
   npm test
   ```
