@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 import request from 'request-promise';
 import logger from '../libs/logger';
 import { initDictionary, filterDictionary, getMostLetter } from '../libs/dictionary';
@@ -9,10 +9,10 @@ const HANGMAN_FINSIHED_STATES = [ 'win', 'lose', 'giveup' ];
 class Hangman {
   constructor(cookie, firstLetter = 'e') {
     this.cookie = cookie;
-    this.id = "";
+    this.id = '';
     this.hp = -1;
-    this.state = "";
-    this.currentWordStr = "";
+    this.state = '';
+    this.currentWordStr = '';
     this.dictionary = initDictionary();
     this.nextLetter = firstLetter;
   }
@@ -33,7 +33,7 @@ class Hangman {
         Cookie: this.cookie
       },
       json: true
-    }
+    };
     return request(options)
       .then((hangman) => {
         this.refreshHangmanByResp(hangman);
@@ -64,9 +64,9 @@ class Hangman {
         Cookie: this.cookie
       },
       json: true
-    }
+    };
     return request(options).then((hangman) => {
-      let falseLetter = ''
+      let falseLetter = '';
       if (this.hp > hangman.data.attributes.hp) {
         falseLetter = letter;
       }

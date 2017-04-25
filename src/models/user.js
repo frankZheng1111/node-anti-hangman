@@ -1,13 +1,12 @@
-'use strict'
+'use strict';
 import request from 'request-promise';
-import logger from '../libs/logger';
 import { hangmanServer } from '../config';
 
 class User {
   constructor(name, password) {
     this.name = name;
     this.password = password;
-    this.cookie = "";
+    this.cookie = '';
     this.loginState = {};
   }
 
@@ -19,12 +18,12 @@ class User {
         name: this.name,
         password: this.password
       },
-      transform: function (body, response, resolveWithFullResponse) {
-        let cookie = response.caseless.dict["set-cookie"][0];
+      transform: function (body, response) {
+        let cookie = response.caseless.dict['set-cookie'][0];
         return [body, cookie];
       },
       json: true
-    }
+    };
     return request(options)
       .then(([body, cookie]) => {
         this.loginState = body;

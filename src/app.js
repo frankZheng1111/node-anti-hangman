@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 import Promise from 'bluebird';
 import logger from './libs/logger';
 import User from './models/user';
@@ -9,7 +9,7 @@ new User(userConfig.name, userConfig.password).signin()
   .then((user) => {
     let counters = [];
     for(let i = 0 ; i < 100 ; i++) { counters.push(i); }
-    Promise.map(counters, (c) => { return Hangman.play(user); }, { concurrency: 1 })
+    Promise.map(counters, () => { return Hangman.play(user); }, { concurrency: 1 })
       .then((results) => {
         let totalCount = results.length;
         let winCount = 0;

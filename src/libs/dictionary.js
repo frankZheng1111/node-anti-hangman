@@ -1,16 +1,15 @@
-'use strict'
+'use strict';
 import fs from 'fs';
 
 // 初始化词频表
 //
 export function initDictionary() {
   let dictionary = [];
-   dictionary = fs.readFileSync('config/dictionary.txt').toString().split('\n');
-  let lettersHash = [{}];
+  dictionary = fs.readFileSync('config/dictionary.txt').toString().split('\n');
   return dictionary.map((word) => {
-     return word.toLowerCase().split('');
+    return word.toLowerCase().split('');
   });
-};
+}
 
 export function filterDictionary(currentDictionary, wordStr, falseLetter = '') {
   let resultDictionary = [];
@@ -24,10 +23,10 @@ export function filterDictionary(currentDictionary, wordStr, falseLetter = '') {
       if( trueLetters.includes(wordArray[i]) && wordStr.split('')[i] !== wordArray[i]) { return false; }
       if( wordStr.split('')[i] !== '*' && wordStr.split('')[i] !== wordArray[i]) { return false; }
     }
-    resultDictionary.push(wordArray)
+    resultDictionary.push(wordArray);
   });
   return resultDictionary;
-};
+}
 
 export function getMostLetter(currentDictionary, wordStr = '') {
   let lettersNums = {};
