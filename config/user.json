@@ -2,5 +2,9 @@
   "dev": {
     "name": "REPLACEYOURNAME",
     "password": "RELACEYOURPASSWORD"
+  },
+  "test": {
+    "name": "REPLACEYOURNAME",
+    "password": "RELACEYOURPASSWORD"
   }
 }
